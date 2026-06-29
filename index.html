@@ -1,0 +1,1697 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <!-- ======================================================
+         CONFIGURAÇÕES DA PÁGINA
+    ======================================================= -->
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Sistema de Cadastro de Manicure
+    </title>
+
+</head>
+
+   <style>
+
+/* ======================================================
+   RESET GLOBAL
+====================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+
+/* ======================================================
+   ESTILO GERAL DA PÁGINA
+====================================================== */
+
+body{
+    background:wheat;
+    color:#333;
+}
+
+
+/* ======================================================
+   CABEÇALHO
+====================================================== */
+
+header{
+    background-image:url("/static/manicure.png");
+    background-size:cover;
+    background-position:center;
+    height:280px;
+}
+
+
+/* ======================================================
+   MENU SUPERIOR
+====================================================== */
+
+.menu{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    padding:18px;
+    background:#ffffff;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+    flex-wrap:wrap;
+}
+
+.menu button{
+
+    background:sienna;
+    color:white;
+
+    border:none;
+    border-radius:25px;
+
+    padding:14px 25px;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.3s;
+}
+
+.menu button:hover{
+
+    opacity:.9;
+    transform:translateY(-2px);
+
+}
+/* ======================================================
+   CONTAINER PRINCIPAL
+====================================================== */
+
+.container{
+    width:95%;
+    max-width:1200px;
+    margin:auto;
+    padding:40px 0;
+}
+
+
+/* ======================================================
+   FORMULÁRIOS
+====================================================== */
+
+.form-box{
+
+    width:780px;
+    max-width:95%;
+
+    margin:auto;
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
+
+}
+
+.form-box h3{
+
+    margin-bottom:18px;
+
+    font-size:20px;
+
+    color:sienna;
+
+}
+
+
+/* ======================================================
+   CAMPOS DE ENTRADA
+====================================================== */
+
+input,
+select{
+
+    width:100%;
+
+    padding:15px;
+
+    margin:8px 0;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    transition:.2s;
+
+}
+
+input:focus,
+select:focus{
+
+    outline:none;
+
+    border-color:sienna;
+
+    box-shadow:0 0 0 3px rgba(160,82,45,.15);
+
+}
+
+
+/* ======================================================
+   BOTÕES
+====================================================== */
+
+button{
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:12px 18px;
+
+    cursor:pointer;
+
+    font-weight:normal;
+
+    transition:.3s;
+
+}
+
+
+/* Botão principal */
+
+
+.btn-pink:hover{
+
+    opacity:.9;
+
+    transform:scale(1.02);
+
+}
+
+
+/* Botão de excluir */
+
+.btn-red{
+
+    background:#e53935;
+
+    color:white;
+
+}
+
+.btn-red:hover{
+
+    opacity:.9;
+
+    transform:scale(1.02);
+
+}
+
+
+/* ======================================================
+   LAYOUT AUXILIAR
+====================================================== */
+
+.layout-duplo{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+
+/* ======================================================
+   RESPONSIVIDADE
+====================================================== */
+
+@media (max-width:768px){
+
+    .menu{
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .form-box{
+
+        padding:25px;
+
+    }
+
+}
+
+ /* ======================================================
+   TABELAS
+====================================================== */
+
+table{
+
+    width:100%;
+
+    margin-top:10px;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 6px 15px rgba(0,0,0,.08);
+
+    font-size:14px;
+
+}
+
+
+/* ======================================================
+   CABEÇALHO DAS TABELAS
+====================================================== */
+
+table th{
+
+    background:sienna;
+
+    color:white;
+
+    padding:12px;
+
+    text-align:center;
+
+    white-space:nowrap;
+
+}
+
+
+/* ======================================================
+   CÉLULAS DAS TABELAS
+====================================================== */
+
+table td{
+
+    padding:10px;
+
+    text-align:center;
+
+    border-bottom:1px solid #eee;
+
+}
+
+
+/* ======================================================
+   EFEITO AO PASSAR O MOUSE
+====================================================== */
+
+table tr:hover{
+
+    background:#fff3e6;
+
+    transition:.2s;
+
+}
+
+
+/* ======================================================
+   BOTÕES DAS TABELAS
+====================================================== */
+
+table button{
+
+    padding:7px 12px;
+
+    border-radius:8px;
+
+    font-size:13px;
+
+}
+
+
+/* Botão Editar */
+
+table button:not(.btn-red){
+
+    background:#8b5a2b;
+
+    color:white;
+
+}
+
+table button:not(.btn-red):hover{
+
+    background:#6e4420;
+
+}
+
+
+/* Botão Excluir */
+
+.btn-red{
+
+    background:#e53935;
+
+    color:white;
+
+}
+
+.btn-red:hover{
+
+    opacity:.9;
+
+    transform:scale(1.05);
+
+}
+
+
+/* ======================================================
+   RELATÓRIOS
+====================================================== */
+
+#relatorios .form-box{
+
+    width:90%;
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:30px;
+
+}
+
+
+/* ======================================================
+   TÍTULO DO RELATÓRIO
+====================================================== */
+
+#relatorios h2{
+
+    font-size:22px;
+
+    font-weight:600;
+
+    color:sienna;
+
+    text-align:center;
+
+    margin-bottom:25px;
+
+}
+
+
+/* ======================================================
+   FORMULÁRIO DE FILTROS
+====================================================== */
+
+#relatorios form{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit, minmax(220px,1fr));
+
+    gap:16px;
+
+    margin-bottom:35px;
+
+    padding:25px;
+
+    background:#faf8f5;
+
+    border:1px solid #ece2d5;
+
+    border-radius:14px;
+
+}
+
+#relatorios form input,
+#relatorios form select{
+
+    margin:0;
+
+}
+
+#relatorios form button{
+
+    height:48px;
+
+}
+
+
+/* ======================================================
+   TABELA DO RELATÓRIO
+====================================================== */
+
+#relatorios table{
+
+    width:100%;
+
+    margin-top:10px;
+
+    border-collapse:collapse;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+    font-size:14px;
+
+}
+
+#relatorios thead{
+
+    background:sienna;
+
+    color:white;
+
+}
+
+#relatorios th{
+
+    padding:15px;
+
+    text-align:center;
+
+    font-weight:600;
+
+}
+
+#relatorios td{
+
+    padding:14px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ececec;
+
+}
+
+#relatorios tbody tr:nth-child(even){
+
+    background:#faf8f5;
+
+}
+
+#relatorios tbody tr:hover{
+
+    background:#f3e7d9;
+
+    transition:.2s;
+
+}
+/* ======================================================
+   RESUMO FINANCEIRO
+====================================================== */
+
+.resumo{
+
+    margin-top:35px;
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit, minmax(210px,1fr));
+
+    gap:18px;
+
+}
+
+
+/* ======================================================
+   CARDS DO RESUMO
+====================================================== */
+
+.card-resumo{
+
+    background:white;
+
+    border:1px solid #e5d7c7;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    box-shadow:0 4px 10px rgba(0,0,0,.06);
+
+}
+
+.card-resumo h4{
+
+    margin-bottom:12px;
+
+    color:sienna;
+
+    font-size:18px;
+
+    font-weight:600;
+
+}
+
+.card-resumo p{
+
+    margin:0;
+
+    color:#333;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+
+/* ======================================================
+   TÍTULO DO RESUMO
+====================================================== */
+
+.titulo-resumo{
+
+    margin-top:30px;
+
+    margin-bottom:18px;
+
+    text-align:center;
+
+    color:sienna;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+}
+
+
+/* ======================================================
+   BOTÕES DO RELATÓRIO
+====================================================== */
+
+.botoes-relatorio{
+
+    display:flex;
+
+    gap:10px;
+
+    align-items:flex-end;
+
+}
+
+.botoes-relatorio button,
+.botoes-relatorio a{
+
+    width:150px;
+
+    height:48px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border:none;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    box-sizing:border-box;
+
+}
+
+
+/* ======================================================
+   BOTÃO PESQUISAR
+====================================================== */
+
+.btn-pink{
+
+    background:sienna;
+
+    color:white;
+
+}
+
+.btn-pink:hover{
+
+    background:#8b5a2b;
+
+}
+
+
+/* ======================================================
+   BOTÃO BAIXAR EXCEL
+====================================================== */
+
+.btn-excel{
+
+    background:#21b128;
+
+    color:white;
+
+}
+
+.btn-excel:hover{
+
+    background:#1b5e20;
+
+}
+
+
+/* ======================================================
+   RESPONSIVIDADE DO RELATÓRIO
+====================================================== */
+
+@media (max-width:768px){
+
+    #relatorios form{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .resumo{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+</style>
+<body>
+
+    <!-- ======================================================
+         CABEÇALHO
+    ======================================================= -->
+
+    <header></header>
+
+    <!-- ======================================================
+         MENU DE NAVEGAÇÃO
+    ======================================================= -->
+
+    <nav class="menu">
+
+        <button onclick="mostrarSecao('clientes')">
+            Clientes
+        </button>
+
+        <button onclick="mostrarSecao('servicos')">
+            Serviços
+        </button>
+
+        <button onclick="mostrarSecao('agendamentos')">
+            Agendamentos
+        </button>
+
+        <button onclick="mostrarSecao('gerenciamento')">
+            Gerenciamento
+        </button>
+
+        <button onclick="mostrarSecao('relatorios')">
+            Relatório
+        </button>
+
+    </nav>
+
+    <!-- ======================================================
+         CONTAINER PRINCIPAL
+    ======================================================= -->
+
+    <div class="container">
+
+        <!-- ==================================================
+             SEÇÃO DE CLIENTES
+        =================================================== -->
+
+        <section
+            id="clientes"
+            class="secao"
+        >
+
+            <div class="form-box">
+
+                <h3>
+                    Cadastro de Cliente
+                </h3>
+
+                <!-- ==========================================
+                     FORMULÁRIO DE CADASTRO
+                =========================================== -->
+
+                <form
+                    method="POST"
+                    action="/cliente"
+                >
+
+                    <label for="nome">
+                        Nome
+                    </label>
+
+                    <input
+                        id="nome"
+                        name="nome"
+                        placeholder="Digite o nome completo"
+                        required
+                    >
+
+                    <label for="telefone">
+                        Telefone
+                    </label>
+
+                    <input
+                        id="telefone"
+                        name="telefone"
+                        placeholder="(99) 99999-9999"
+                        required
+                    >
+
+                    <label for="cpf">
+                        CPF
+                    </label>
+
+                    <input
+                        id="cpf"
+                        name="cpf"
+                        placeholder="000.000.000-00"
+                        required
+                    >
+
+                    <label for="data_nascimento">
+                        Data de Nascimento
+                    </label>
+
+                    <input
+                        type="date"
+                        id="data_nascimento"
+                        name="data_nascimento"
+                    >
+
+                    <label for="bairro">
+                        Bairro
+                    </label>
+
+                    <input
+                        id="bairro"
+                        name="bairro"
+                        placeholder="Digite o bairro"
+                    >
+
+                    <label for="rua">
+                        Rua
+                    </label>
+
+                    <input
+                        id="rua"
+                        name="rua"
+                        placeholder="Digite a rua"
+                    >
+
+                    <label for="numero_casa">
+                        Número
+                    </label>
+
+                    <input
+                        id="numero_casa"
+                        name="numero_casa"
+                        placeholder="Número da residência"
+                    >
+
+                    <label for="cidade">
+                        Cidade
+                    </label>
+
+                    <input
+                        id="cidade"
+                        name="cidade"
+                        placeholder="Digite a cidade"
+                    >
+
+                    <label for="estado">
+                        Estado (UF)
+                    </label>
+
+                    <input
+                        id="estado"
+                        name="estado"
+                        placeholder="Ex.: PI"
+                    >
+
+                    <label for="cep">
+                        CEP
+                    </label>
+
+                    <input
+                        id="cep"
+                        name="cep"
+                        placeholder="00000-000"
+                    >
+
+                    <label for="complemento">
+                        Complemento
+                    </label>
+
+                    <input
+                        id="complemento"
+                        name="complemento"
+                        placeholder="Apartamento, bloco, referência..."
+                    >
+
+                    <button class="btn-pink">
+                        Salvar
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+ <!-- ======================================================
+     SEÇÃO DE SERVIÇOS
+====================================================== -->
+
+<section
+    id="servicos"
+    class="secao"
+    style="display:none;"
+>
+
+    <div class="form-box">
+
+        <h3>
+            Cadastro de Serviço
+        </h3>
+
+        <form
+            method="POST"
+            action="/servico"
+        >
+
+            <label for="nome_servico">
+                Nome do Serviço
+            </label>
+
+            <input
+                id="nome_servico"
+                name="nome"
+                placeholder="Ex.: Manicure Completa"
+                required
+            >
+
+            <label for="valor">
+                Valor (R$)
+            </label>
+
+            <input
+    type="number"
+    step="0.01"
+    id="valor"
+    name="valor"
+    placeholder="0,00"
+    required
+>   
+
+            <button class="btn-pink">
+                Salvar
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ======================================================
+     SEÇÃO DE AGENDAMENTOS
+====================================================== -->
+
+<section
+    id="agendamentos"
+    class="secao"
+    style="display:none;"
+>
+
+    <div class="form-box">
+
+        <h3>
+            Cadastro de Agendamento
+        </h3>
+
+        <form
+            method="POST"
+            action="/agendar"
+            autocomplete="off"
+            spellcheck="false"
+        >
+
+            <!-- ==========================================
+                 CLIENTE
+            =========================================== -->
+
+            <label for="id_cliente">
+                Cliente
+            </label>
+
+            <select
+                id="id_cliente"
+                name="id_cliente"
+                required
+            >
+
+                <option
+                    value=""
+                    selected
+                    disabled
+                >
+                    Selecione um cliente
+                </option>
+
+                {% if clientes %}
+
+                    {% for c in clientes %}
+
+                        <option value="{{ c[0] }}">
+                            {{ c[1] }}
+                        </option>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <option
+                        value=""
+                        disabled
+                    >
+                        Nenhum cliente cadastrado
+                    </option>
+
+                {% endif %}
+
+            </select>
+
+
+            <!-- ==========================================
+                 SERVIÇO
+            =========================================== -->
+
+            <label for="id_servico">
+                Serviço
+            </label>
+
+            <select
+                id="id_servico"
+                name="id_servico"
+                required
+            >
+
+                <option
+                    value=""
+                    selected
+                    disabled
+                >
+                    Selecione um serviço
+                </option>
+
+                {% if servicos %}
+
+                    {% for s in servicos %}
+
+                        <option value="{{ s[0] }}">
+                            {{ s[1] }}
+                        </option>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <option
+                        value=""
+                        disabled
+                    >
+                        Nenhum serviço cadastrado
+                    </option>
+
+                {% endif %}
+
+            </select>
+
+
+            <!-- ==========================================
+                 FORMA DE PAGAMENTO
+            =========================================== -->
+
+            <label for="forma_pagamento">
+                Forma de Pagamento
+            </label>
+
+            <select
+                id="forma_pagamento"
+                name="forma_pagamento"
+                required
+            >
+
+                <option
+                    value=""
+                    selected
+                    disabled
+                >
+                    Selecione uma forma de pagamento
+                </option>
+
+                <option value="PIX">
+                    PIX
+                </option>
+
+                <option value="Dinheiro">
+                    Dinheiro
+                </option>
+
+                <option value="Cartão Débito">
+                    Cartão Débito
+                </option>
+
+                <option value="Cartão Crédito">
+                    Cartão Crédito
+                </option>
+
+            </select>
+
+
+            <!-- ==========================================
+                 DATA E HORA
+            =========================================== -->
+
+            <label for="data_hora">
+                Data e Hora do Agendamento
+            </label>
+
+            <input
+                type="datetime-local"
+                id="data_hora"
+                name="data_hora"
+                required
+                autocomplete="off"
+            >
+
+            <button
+                type="submit"
+                class="btn-pink"
+            >
+                Agendar
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+    <!-- GERENCIAMENTO -->
+    <section id="gerenciamento" class="secao" style="display:none;">
+
+    <div class="form-box">
+
+    <h3>Gerenciamento de Clientes</h3>
+
+    <table border="1" width="100%">
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Telefone</th>
+        <th>CPF</th>
+        <th>Data/Nascimento</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for c in clientes %}
+    <tr>
+        <td>{{ c[0] }}</td>
+        <td>{{ c[1] }}</td>
+        <td class="telefone">{{ c[2] }}</td>
+        <td>{{ c[3] }}</td>
+        <td>{{ c[4].strftime('%d/%m/%Y') }}</td>
+        <td>
+            <a href="/editar_cliente/{{ c[0] }}">
+                <button>Editar</button>
+            </a>
+
+            <a href="/delete_cliente/{{ c[0] }}"
+            onclick="return confirm('Deseja excluir este cliente?')">
+                <button class="btn-red">Excluir</button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    <br><br>
+
+    <h3>Gerenciamento de Serviços</h3>
+
+    <table border="1" width="100%">
+    <tr>
+        <th>ID</th>
+        <th>Serviço</th>
+        <th>Valor</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for s in servicos %}
+    <tr>
+        <td>{{ s[0] }}</td>
+        <td>{{ s[1] }}</td>
+        <td>R$ {{ s[2] }}</td>
+        <td>
+
+            <a href="/editar_servico/{{ s[0] }}">
+                <button>Editar</button>
+            </a>
+
+            <a href="/delete_servico/{{ s[0] }}"
+            onclick="return confirm('Deseja excluir este serviço?')">
+                <button class="btn-red">Excluir</button>
+            </a>
+
+        </td>
+    </tr>
+    {% endfor %}
+    </table>
+
+    <br><br>
+
+    <h3>Gerenciamento de Agendamentos</h3>
+
+    <table border="1" width="100%">
+    <tr>
+        <th>Cliente</th>
+        <th>Serviço</th>
+        <th>Data/Hora</th>
+        <th>Forma de Pagamento</th>
+        <th>Ações</th>
+    </tr>
+
+    {% for a in agendamentos %}
+    <tr>
+        <td>{{ a[1] }}</td> <!-- cliente -->
+        <td>{{ a[2] }}</td> <!-- serviço -->
+        <td>{{ a[4].strftime('%d/%m/%Y %H:%M') }}</td>
+        <td>{{ a[3] }}</td> <!-- forma pagamento -->
+
+        <td>
+
+            <a href="/editar_agendamento/{{ a[0] }}">
+                <button>Editar</button>
+            </a>
+
+            <a href="/delete_agendamento/{{ a[0] }}"
+            onclick="return confirm('Deseja excluir este agendamento?')">
+                <button class="btn-red">Excluir</button>
+            </a>
+
+        </td>
+    </tr>
+    {% endfor %}
+
+    </table>
+
+    </div>
+
+    </section>
+   <!-- ======================================================
+     SEÇÃO DE RELATÓRIOS
+====================================================== -->
+
+<section
+    id="relatorios"
+    class="secao"
+    style="display:none;"
+>
+
+    <div class="form-box">
+
+        <!-- ==================================================
+             TÍTULO
+        =================================================== -->
+
+        <h2>
+            Relatório Financeiro
+        </h2>
+
+        <!-- ==================================================
+             FORMULÁRIO DE FILTROS
+        =================================================== -->
+
+        <form
+            method="GET"
+            action="/relatorios"
+        >
+
+            <!-- Data Inicial -->
+
+            <div>
+
+                <label for="data_inicio">
+                    Data Inicial
+                </label>
+
+                <input
+                    type="date"
+                    id="data_inicio"
+                    name="data_inicio"
+                >
+
+            </div>
+
+
+            <!-- Data Final -->
+
+            <div>
+
+                <label for="data_fim">
+                    Data Final
+                </label>
+
+                <input
+                    type="date"
+                    id="data_fim"
+                    name="data_fim"
+                >
+
+            </div>
+
+
+            <!-- Cliente -->
+
+            <div>
+
+                <label for="cliente">
+                    Cliente
+                </label>
+
+                <select
+                    id="cliente"
+                    name="cliente"
+                >
+
+                    <option value="">
+                        Todos os clientes
+                    </option>
+
+                    {% for c in clientes %}
+
+                    <option value="{{ c[0] }}">
+                        {{ c[1] }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Serviço -->
+
+            <div>
+
+                <label for="servico">
+                    Serviço
+                </label>
+
+                <select
+                    id="servico"
+                    name="servico"
+                >
+
+                    <option value="">
+                        Todos os serviços
+                    </option>
+
+                    {% for s in servicos %}
+
+                    <option value="{{ s[0] }}">
+                        {{ s[1] }}
+                    </option>
+
+                    {% endfor %}
+
+                </select>
+
+            </div>
+
+
+            <!-- Forma de Pagamento -->
+
+            <div>
+
+                <label for="pagamento">
+                    Forma de Pagamento
+                </label>
+
+                <select
+                    id="pagamento"
+                    name="pagamento"
+                >
+
+                    <option value="">
+                        Todas
+                    </option>
+
+                    <option>PIX</option>
+
+                    <option>Dinheiro</option>
+
+                    <option>Cartão Débito</option>
+
+                    <option>Cartão Crédito</option>
+
+                </select>
+
+            </div>
+
+
+            <!-- Botões -->
+
+            <div class="botoes-relatorio">
+
+                <button
+                    type="submit"
+                    class="btn-pink"
+                >
+                    Pesquisar
+                </button>
+
+                <!-- ======================================================
+     BOTÃO PARA BAIXAR O RELATÓRIO EM EXCEL
+====================================================== -->
+
+<a
+    href="/baixar_relatorio?
+    data_inicio={{ request.args.get('data_inicio', '') }}
+    &data_fim={{ request.args.get('data_fim', '') }}
+    &cliente={{ request.args.get('cliente', '') }}
+    &servico={{ request.args.get('servico', '') }}
+    &pagamento={{ request.args.get('pagamento', '') }}"
+>
+
+    <button
+        type="button"
+        class="btn-excel"
+    >
+        Baixar Excel
+    </button>
+
+</a>
+
+            </div>
+
+        </form>
+
+        <!-- ==================================================
+             TABELA DE RESULTADOS
+        =================================================== -->
+
+        <table>
+
+            <tr>
+
+                <th>Cliente</th>
+
+                <th>Serviço</th>
+
+                <th>Valor</th>
+
+                <th>Pagamento</th>
+
+                <th>Data/Hora</th>
+
+            </tr>
+
+            {% for d in dados %}
+
+            <tr>
+
+                <td>{{ d[0] }}</td>
+
+                <td>{{ d[1] }}</td>
+
+                <td>
+                    R$ {{ d[2] }}
+                </td>
+
+                <td>{{ d[3] }}</td>
+
+                <td>
+                    {{ d[4].strftime('%d/%m/%Y %H:%M') }}
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+           <!-- ==================================================
+             RESUMO FINANCEIRO
+        =================================================== -->
+
+        <h3 class="titulo-resumo">
+            Resumo Financeiro
+        </h3>
+
+        <div class="resumo">
+
+            <!-- ==========================================
+                 FATURAMENTO
+            =========================================== -->
+
+            <div class="card-resumo">
+
+                <h4>
+                    Faturamento
+                </h4>
+
+                <p>
+                    R$ {{ faturamento }}
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 TOTAL DE AGENDAMENTOS
+            =========================================== -->
+
+            <div class="card-resumo">
+
+                <h4>
+                    Agendamentos
+                </h4>
+
+                <p>
+                    {{ total_agendamentos }}
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 CLIENTES ATENDIDOS
+            =========================================== -->
+
+            <div class="card-resumo">
+
+                <h4>
+                    Clientes Atendidos
+                </h4>
+
+                <p>
+                    {{ clientes_atendidos }}
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 SERVIÇO MAIS REALIZADO
+            =========================================== -->
+
+            <div class="card-resumo">
+
+                <h4>
+                    Serviço Mais Realizado
+                </h4>
+
+                <p>
+                    {{ mais_servico[0] if mais_servico else "-" }}
+                </p>
+
+            </div>
+
+
+            <!-- ==========================================
+                 PAGAMENTO MAIS UTILIZADO
+            =========================================== -->
+
+            <div class="card-resumo">
+
+                <h4>
+                    Pagamento Mais Utilizado
+                </h4>
+
+                <p>
+                    {{ mais_pagamento[0] if mais_pagamento else "-" }}
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+  <script>
+
+    /* ======================================================
+       EXIBIR A SEÇÃO SELECIONADA
+    ======================================================= */
+
+    function mostrarSecao(id){
+
+        // Oculta todas as seções da página
+        document
+            .querySelectorAll(".secao")
+            .forEach(function(secao){
+
+                secao.style.display = "none";
+
+            });
+
+        // Exibe apenas a seção selecionada
+        document
+            .getElementById(id)
+            .style.display = "block";
+
+        // Salva a seção aberta no navegador
+        localStorage.setItem(
+            "secaoAtiva",
+            id
+        );
+
+    }
+
+
+    /* ======================================================
+       CARREGAMENTO DA PÁGINA
+    ======================================================= */
+
+    window.onload = function(){
+
+        // Recupera a última seção acessada
+        let secao = localStorage.getItem(
+            "secaoAtiva"
+        );
+
+        // Caso exista uma seção salva,
+        // ela será aberta automaticamente
+        if(secao){
+
+            mostrarSecao(secao);
+
+        }
+
+        // Caso contrário,
+        // abre a seção de clientes
+        else{
+
+            mostrarSecao("clientes");
+
+        }
+
+    };
+    /* ======================================================
+       FORMATAÇÃO DO TELEFONE
+    ======================================================= */
+
+    function formatarTelefone(numero){
+
+        // Remove todos os caracteres que não são números
+        numero = numero.replace(/\D/g, "");
+
+        // Celular com 11 dígitos
+        if(numero.length == 11){
+
+            return numero.replace(
+                /(\d{2})(\d{5})(\d{4})/,
+                "($1) $2-$3"
+            );
+
+        }
+
+        // Telefone fixo com 10 dígitos
+        if(numero.length == 10){
+
+            return numero.replace(
+                /(\d{2})(\d{4})(\d{4})/,
+                "($1) $2-$3"
+            );
+
+        }
+
+        // Caso o número esteja incompleto,
+        // retorna como está
+        return numero;
+
+    }
+
+
+    /* ======================================================
+       APLICA A FORMATAÇÃO NA TABELA
+    ======================================================= */
+
+    document
+        .querySelectorAll(".telefone")
+        .forEach(function(campo){
+
+            campo.textContent = formatarTelefone(
+                campo.textContent
+            );
+
+        });
+
+</script>
+
+</body>
+
+</html>
