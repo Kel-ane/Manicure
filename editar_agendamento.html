@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Agendamento</title>
+    <style>
+/* =========================
+   RESET GLOBAL
+========================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+/* =========================
+   FUNDO
+========================= */
+body{
+    background:wheat;
+    color:#333;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    min-height:100vh;
+    padding:40px 20px;
+}
+
+/* =========================
+   CARD
+========================= */
+.card{
+    width:100%;
+    max-width:500px;
+    background:white;
+    padding:30px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+}
+
+/* =========================
+   TÍTULO
+========================= */
+.card h2{
+    text-align:center;
+    color:sienna;
+    font-size:22px;
+    margin-bottom:25px;
+    font-weight:600;
+}
+
+/* =========================
+   LABELS
+========================= */
+label{
+    display:block;
+    margin-bottom:6px;
+    margin-top:14px;
+    color:#555;
+    font-size:14px;
+    font-weight:500;
+}
+
+/* =========================
+   CAMPOS
+========================= */
+input,
+select{
+    width:100%;
+    padding:14px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    font-size:15px;
+    background:white;
+    transition:.2s;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:sienna;
+    box-shadow:0 0 0 3px rgba(160,82,45,.15);
+}
+
+/* =========================
+   BOTÃO
+========================= */
+button{
+    width:100%;
+    margin-top:25px;
+    padding:13px;
+    border:none;
+    border-radius:10px;
+    background:sienna;
+    color:white;
+    font-size:15px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+button:hover{
+    opacity:.9;
+    transform:translateY(-2px);
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+@media (max-width:768px){
+
+    .card{
+        padding:25px;
+    }
+
+    .card h2{
+        font-size:20px;
+    }
+
+}
+/* BOTÃO SALVAR */
+.btn-primary{
+    background:sienna;
+    color:white;
+}
+
+/* BOTÃO CANCELAR */
+.btn-secondary{
+    margin-top:10px;
+    background:#f2f2f2;
+    color:#444;
+    border:1px solid #ddd;
+}
+
+.btn-secondary:hover{
+    background:#e9e9e9;
+    transform:translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h2>Editar Agendamento</h2>
+<form method="POST"
+      action="/update_agendamento/{{ agendamento[0] }}">
+
+    <label for="id_cliente">Cliente</label>
+    <select id="id_cliente" name="id_cliente">
+        {% for c in clientes %}
+        <option value="{{ c[0] }}"
+            {% if c[0] == agendamento[1] %}selected{% endif %}>
+            {{ c[1] }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label for="id_servico">Serviço</label>
+    <select id="id_servico" name="id_servico">
+        {% for s in servicos %}
+        <option value="{{ s[0] }}"
+            {% if s[0] == agendamento[2] %}selected{% endif %}>
+            {{ s[1] }}
+        </option>
+        {% endfor %}
+    </select>
+
+    <label for="forma_pagamento">Forma de Pagamento</label>
+    <select id="forma_pagamento" name="forma_pagamento">
+        <option value="PIX"
+            {% if agendamento[3] == "PIX" %}selected{% endif %}>PIX</option>
+
+        <option value="Dinheiro"
+            {% if agendamento[3] == "Dinheiro" %}selected{% endif %}>Dinheiro</option>
+
+        <option value="Cartão Débito"
+            {% if agendamento[3] == "Cartão Débito" %}selected{% endif %}>Cartão Débito</option>
+
+        <option value="Cartão Crédito"
+            {% if agendamento[3] == "Cartão Crédito" %}selected{% endif %}>Cartão Crédito</option>
+    </select>
+
+    <label for="data_hora">Data e Hora</label>
+    <input
+        type="datetime-local"
+        id="data_hora"
+        name="data_hora"
+        value="{{ agendamento[4] }}">
+
+    <button type="submit" class="btn-primary">
+        Salvar Alterações
+    </button>
+
+</form>
+
+<a href="/#gerenciamento">
+    <button type="button" class="btn-secondary">
+        Cancelar
+    </button>
+</a>
+
+</div>
+
+</body>
+</html>
